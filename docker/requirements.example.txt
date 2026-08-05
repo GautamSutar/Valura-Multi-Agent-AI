@@ -1,0 +1,5 @@
+# Pin your versions. We build this file as it stands.
+agno==2.6.9
+openai>=1.0
+fastapi>=0.115
+uvicorn>=0.30

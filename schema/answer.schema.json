@@ -1,0 +1,88 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Valura take-home answer contract",
+ "type": "object",
+ "required": [
+  "question_id",
+  "answer",
+  "answer_value",
+  "abstained",
+  "refused",
+  "reason",
+  "citations",
+  "confidence"
+ ],
+ "additionalProperties": true,
+ "properties": {
+  "question_id": {
+   "type": "string",
+   "description": "Must equal the question_id asked."
+  },
+  "answer": {
+   "type": "string",
+   "description": "Natural language. May be empty when abstaining or refusing."
+  },
+  "answer_value": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "The single figure, count or date requested, as a string. USD with no symbol or separators; dates ISO. Must be null when abstained or refused."
+  },
+  "abstained": {
+   "type": "boolean",
+   "description": "True when the data cannot support an answer."
+  },
+  "refused": {
+   "type": "boolean",
+   "description": "True when policy forbids answering."
+  },
+  "reason": {
+   "type": [
+    "string",
+    "null"
+   ],
+   "description": "Required and non-empty whenever abstained or refused is true."
+  },
+  "citations": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Record ids the answer relies on. Cite the client id instead when more than 6 records are involved."
+  },
+  "confidence": {
+   "type": "number",
+   "minimum": 0,
+   "maximum": 1
+  },
+  "flags": {
+   "type": "array",
+   "items": {
+    "enum": [
+     "conflict",
+     "upstream_issue",
+     "stale_data"
+    ]
+   }
+  },
+  "agents": {
+   "type": "array",
+   "items": {
+    "enum": [
+     "router",
+     "book_qa",
+     "kyc_profile",
+     "notes_desk",
+     "market_desk",
+     "compliance",
+     "verifier"
+    ]
+   },
+   "contains": {
+    "const": "router"
+   },
+   "description": "The ordered role path that produced this answer. Must include 'router'. Report what actually ran."
+  }
+ }
+}

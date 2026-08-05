@@ -1,0 +1,1851 @@
+{
+ "meta": {
+  "synthetic": true,
+  "as_of": "2026-07-31",
+  "note": "Fabricated market data. Prices are monthly closes generated from a seed and correspond to no real instrument. Coverage is exactly the instruments listed here: anything else is outside this dataset, and no figure for it exists.",
+  "covered_symbols": [
+   "AAPL",
+   "AMD",
+   "AMZN",
+   "GOOG",
+   "INTC",
+   "JPM",
+   "KO",
+   "META",
+   "MSFT",
+   "NFLX",
+   "NVDA",
+   "QQQ",
+   "TSLA",
+   "VOO"
+  ]
+ },
+ "instruments": [
+  {
+   "symbol": "AAPL",
+   "sector": "Information Technology",
+   "industry": "Consumer Electronics",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "AMD",
+   "sector": "Information Technology",
+   "industry": "Semiconductors",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "AMZN",
+   "sector": "Consumer Discretionary",
+   "industry": "Internet Retail",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "GOOG",
+   "sector": "Communication Services",
+   "industry": "Interactive Media",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "INTC",
+   "sector": "Information Technology",
+   "industry": "Semiconductors",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "JPM",
+   "sector": "Financials",
+   "industry": "Diversified Banks",
+   "currency": "USD",
+   "listed_on": "NYSE"
+  },
+  {
+   "symbol": "KO",
+   "sector": "Consumer Staples",
+   "industry": "Soft Drinks",
+   "currency": "USD",
+   "listed_on": "NYSE"
+  },
+  {
+   "symbol": "META",
+   "sector": "Communication Services",
+   "industry": "Interactive Media",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "MSFT",
+   "sector": "Information Technology",
+   "industry": "Software",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "NFLX",
+   "sector": "Communication Services",
+   "industry": "Entertainment",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "NVDA",
+   "sector": "Information Technology",
+   "industry": "Semiconductors",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "QQQ",
+   "sector": "Diversified",
+   "industry": "Broad Market ETF",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "TSLA",
+   "sector": "Consumer Discretionary",
+   "industry": "Automobiles",
+   "currency": "USD",
+   "listed_on": "NASDAQ"
+  },
+  {
+   "symbol": "VOO",
+   "sector": "Diversified",
+   "industry": "Broad Market ETF",
+   "currency": "USD",
+   "listed_on": "NYSE"
+  }
+ ],
+ "prices": {
+  "AAPL": [
+   {
+    "date": "2024-07-01",
+    "close": "198.18"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "190.39"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "188.07"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "178.87"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "169.19"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "173.17"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "177.06"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "175.91"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "171.26"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "175.19"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "175.39"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "184.92"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "189.41"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "191.89"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "185.57"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "176.30"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "185.85"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "183.97"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "178.91"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "190.61"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "180.29"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "192.33"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "190.17"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "184.47"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "184.16"
+   }
+  ],
+  "AMD": [
+   {
+    "date": "2024-07-01",
+    "close": "156.37"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "157.68"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "156.36"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "149.23"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "159.48"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "160.87"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "157.91"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "158.13"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "149.15"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "156.24"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "163.36"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "165.29"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "173.26"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "183.25"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "178.77"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "189.74"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "181.38"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "180.09"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "173.90"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "168.87"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "175.32"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "168.85"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "167.63"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "161.86"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "164.95"
+   }
+  ],
+  "AMZN": [
+   {
+    "date": "2024-07-01",
+    "close": "191.97"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "192.05"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "200.10"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "194.58"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "206.45"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "214.33"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "221.94"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "215.32"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "205.74"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "200.70"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "189.91"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "203.17"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "193.93"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "194.43"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "201.85"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "197.96"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "203.96"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "200.09"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "212.25"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "203.44"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "193.27"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "195.96"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "206.11"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "199.46"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "195.44"
+   }
+  ],
+  "GOOG": [
+   {
+    "date": "2024-07-01",
+    "close": "163.33"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "163.17"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "164.05"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "162.01"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "164.53"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "159.35"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "163.23"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "161.64"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "162.35"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "160.73"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "154.54"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "145.49"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "148.59"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "157.02"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "157.96"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "151.19"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "153.86"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "145.09"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "153.28"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "155.81"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "153.78"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "152.74"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "161.92"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "164.37"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "174.82"
+   }
+  ],
+  "INTC": [
+   {
+    "date": "2024-07-01",
+    "close": "36.29"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "38.05"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "40.59"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "39.34"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "38.98"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "39.59"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "40.08"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "38.37"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "40.91"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "41.88"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "44.70"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "47.46"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "46.28"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "44.10"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "44.55"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "46.33"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "49.04"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "51.13"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "51.84"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "51.30"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "52.92"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "55.80"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "53.72"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "53.18"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "53.18"
+   }
+  ],
+  "JPM": [
+   {
+    "date": "2024-07-01",
+    "close": "195.73"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "199.77"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "198.94"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "205.23"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "218.81"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "219.42"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "223.13"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "211.99"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "210.85"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "217.40"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "205.02"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "203.45"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "214.24"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "212.24"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "223.19"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "213.80"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "201.15"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "205.48"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "210.13"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "202.44"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "212.55"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "205.11"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "218.57"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "228.02"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "218.91"
+   }
+  ],
+  "KO": [
+   {
+    "date": "2024-07-01",
+    "close": "56.59"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "58.44"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "58.56"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "55.86"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "54.11"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "56.53"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "53.63"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "55.17"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "56.96"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "60.50"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "63.77"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "61.93"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "62.14"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "61.04"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "57.79"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "60.06"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "58.27"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "56.19"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "53.43"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "55.26"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "55.93"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "55.05"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "57.87"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "59.79"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "58.74"
+   }
+  ],
+  "META": [
+   {
+    "date": "2024-07-01",
+    "close": "451.74"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "476.56"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "507.74"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "512.45"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "537.55"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "553.07"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "537.73"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "556.38"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "537.92"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "511.81"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "483.23"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "488.38"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "486.51"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "514.60"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "537.61"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "514.92"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "539.34"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "526.86"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "539.36"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "548.47"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "556.75"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "586.41"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "597.56"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "587.80"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "580.42"
+   }
+  ],
+  "MSFT": [
+   {
+    "date": "2024-07-01",
+    "close": "396.83"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "395.00"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "416.03"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "402.54"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "429.98"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "447.78"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "434.30"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "446.18"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "444.64"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "425.87"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "420.84"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "425.96"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "446.84"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "420.74"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "448.94"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "449.61"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "451.55"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "480.96"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "460.05"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "486.84"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "507.65"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "496.61"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "510.73"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "544.30"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "549.44"
+   }
+  ],
+  "NFLX": [
+   {
+    "date": "2024-07-01",
+    "close": "641.31"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "638.77"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "664.70"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "697.94"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "658.73"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "640.76"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "660.56"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "639.13"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "681.57"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "653.55"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "635.36"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "677.01"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "669.18"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "660.26"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "688.77"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "662.30"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "629.33"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "628.68"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "617.54"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "595.21"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "577.81"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "569.44"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "561.17"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "571.28"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "597.39"
+   }
+  ],
+  "NVDA": [
+   {
+    "date": "2024-07-01",
+    "close": "853.78"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "913.21"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "885.85"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "878.61"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "893.11"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "858.10"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "830.10"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "787.92"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "745.12"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "737.84"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "706.24"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "704.24"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "676.55"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "697.24"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "740.97"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "740.04"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "762.58"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "802.36"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "824.01"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "864.60"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "912.50"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "868.61"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "914.26"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "945.54"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "940.11"
+   }
+  ],
+  "QQQ": [
+   {
+    "date": "2024-07-01",
+    "close": "423.12"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "424.88"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "435.27"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "422.52"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "440.01"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "439.47"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "457.50"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "474.16"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "463.04"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "485.69"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "485.14"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "509.28"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "529.46"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "514.33"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "521.40"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "556.00"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "571.75"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "543.18"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "571.95"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "607.76"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "612.40"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "614.78"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "642.21"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "668.05"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "695.10"
+   }
+  ],
+  "TSLA": [
+   {
+    "date": "2024-07-01",
+    "close": "251.18"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "258.93"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "246.76"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "236.49"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "224.64"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "237.65"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "253.76"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "253.61"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "244.33"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "233.34"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "219.98"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "211.01"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "215.11"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "207.74"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "210.88"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "214.56"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "224.01"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "229.60"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "220.80"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "228.62"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "217.12"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "218.07"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "206.77"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "196.19"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "187.60"
+   }
+  ],
+  "VOO": [
+   {
+    "date": "2024-07-01",
+    "close": "448.26"
+   },
+   {
+    "date": "2024-08-01",
+    "close": "442.01"
+   },
+   {
+    "date": "2024-09-01",
+    "close": "436.87"
+   },
+   {
+    "date": "2024-10-01",
+    "close": "464.16"
+   },
+   {
+    "date": "2024-11-01",
+    "close": "484.50"
+   },
+   {
+    "date": "2024-12-01",
+    "close": "486.12"
+   },
+   {
+    "date": "2025-01-01",
+    "close": "474.91"
+   },
+   {
+    "date": "2025-02-01",
+    "close": "446.96"
+   },
+   {
+    "date": "2025-03-01",
+    "close": "436.26"
+   },
+   {
+    "date": "2025-04-01",
+    "close": "444.22"
+   },
+   {
+    "date": "2025-05-01",
+    "close": "457.05"
+   },
+   {
+    "date": "2025-06-01",
+    "close": "485.41"
+   },
+   {
+    "date": "2025-07-01",
+    "close": "492.57"
+   },
+   {
+    "date": "2025-08-01",
+    "close": "522.88"
+   },
+   {
+    "date": "2025-09-01",
+    "close": "515.52"
+   },
+   {
+    "date": "2025-10-01",
+    "close": "545.28"
+   },
+   {
+    "date": "2025-11-01",
+    "close": "539.33"
+   },
+   {
+    "date": "2025-12-01",
+    "close": "572.21"
+   },
+   {
+    "date": "2026-01-01",
+    "close": "543.32"
+   },
+   {
+    "date": "2026-02-01",
+    "close": "535.52"
+   },
+   {
+    "date": "2026-03-01",
+    "close": "532.45"
+   },
+   {
+    "date": "2026-04-01",
+    "close": "532.95"
+   },
+   {
+    "date": "2026-05-01",
+    "close": "523.80"
+   },
+   {
+    "date": "2026-06-01",
+    "close": "556.19"
+   },
+   {
+    "date": "2026-07-01",
+    "close": "573.41"
+   }
+  ]
+ },
+ "news": [
+  {
+   "id": "news_2008",
+   "date": "2025-03-20",
+   "symbol": "AMZN",
+   "headline": "AMZN names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2028",
+   "date": "2025-03-22",
+   "symbol": "NVDA",
+   "headline": "Regulator opens a routine review touching NVDA",
+   "body": "The review is described as routine and sector-wide. The company said it is cooperating and does not expect a material impact.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2021",
+   "date": "2025-04-15",
+   "symbol": "MSFT",
+   "headline": "MSFT expands capacity at its second facility",
+   "body": "The expansion is expected to come online next year and was funded from previously announced capital plans.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2019",
+   "date": "2025-04-17",
+   "symbol": "META",
+   "headline": "META lifts full-year guidance after stronger quarter",
+   "body": "The company raised its full-year outlook, citing demand it described as ahead of plan. Management left the capital expenditure range unchanged.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2007",
+   "date": "2025-05-16",
+   "symbol": "AMZN",
+   "headline": "AMZN names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2035",
+   "date": "2025-05-26",
+   "symbol": "VOO",
+   "headline": "VOO announces a share buyback programme",
+   "body": "The board approved a repurchase authorisation to be executed over the next four quarters, funded from operating cash flow.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2029",
+   "date": "2025-06-05",
+   "symbol": "QQQ",
+   "headline": "QQQ announces a share buyback programme",
+   "body": "The board approved a repurchase authorisation to be executed over the next four quarters, funded from operating cash flow.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2002",
+   "date": "2025-06-09",
+   "symbol": "AAPL",
+   "headline": "AAPL announces a share buyback programme",
+   "body": "The board approved a repurchase authorisation to be executed over the next four quarters, funded from operating cash flow.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2016",
+   "date": "2025-06-15",
+   "symbol": "JPM",
+   "headline": "JPM names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2017",
+   "date": "2025-06-20",
+   "symbol": "KO",
+   "headline": "KO expands capacity at its second facility",
+   "body": "The expansion is expected to come online next year and was funded from previously announced capital plans.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2026",
+   "date": "2025-06-26",
+   "symbol": "NVDA",
+   "headline": "NVDA expands capacity at its second facility",
+   "body": "The expansion is expected to come online next year and was funded from previously announced capital plans.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2023",
+   "date": "2025-08-02",
+   "symbol": "NFLX",
+   "headline": "NFLX reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2010",
+   "date": "2025-08-05",
+   "symbol": "GOOG",
+   "headline": "GOOG reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2036",
+   "date": "2025-08-06",
+   "symbol": "VOO",
+   "headline": "Analysts split on VOO after the latest print",
+   "body": "Coverage is divided: some read the quarter as an inflection, others as a one-off. No consensus revision has been published.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2032",
+   "date": "2025-08-16",
+   "symbol": "TSLA",
+   "headline": "TSLA completes a small bolt-on acquisition",
+   "body": "Terms were not disclosed and the company said the transaction is not material to earnings in the current year.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2024",
+   "date": "2025-09-28",
+   "symbol": "NFLX",
+   "headline": "NFLX announces a share buyback programme",
+   "body": "The board approved a repurchase authorisation to be executed over the next four quarters, funded from operating cash flow.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2022",
+   "date": "2025-10-07",
+   "symbol": "MSFT",
+   "headline": "MSFT reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2033",
+   "date": "2025-10-15",
+   "symbol": "TSLA",
+   "headline": "TSLA names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2037",
+   "date": "2025-10-19",
+   "symbol": "VOO",
+   "headline": "Regulator opens a routine review touching VOO",
+   "body": "The review is described as routine and sector-wide. The company said it is cooperating and does not expect a material impact.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2014",
+   "date": "2025-11-11",
+   "symbol": "INTC",
+   "headline": "INTC names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2020",
+   "date": "2025-11-12",
+   "symbol": "META",
+   "headline": "Analysts split on META after the latest print",
+   "body": "Coverage is divided: some read the quarter as an inflection, others as a one-off. No consensus revision has been published.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2009",
+   "date": "2025-11-26",
+   "symbol": "GOOG",
+   "headline": "GOOG lifts full-year guidance after stronger quarter",
+   "body": "The company raised its full-year outlook, citing demand it described as ahead of plan. Management left the capital expenditure range unchanged.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2001",
+   "date": "2025-12-06",
+   "symbol": "AAPL",
+   "headline": "Analysts split on AAPL after the latest print",
+   "body": "Coverage is divided: some read the quarter as an inflection, others as a one-off. No consensus revision has been published.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2018",
+   "date": "2025-12-25",
+   "symbol": "KO",
+   "headline": "KO names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2031",
+   "date": "2026-01-03",
+   "symbol": "QQQ",
+   "headline": "QQQ lifts full-year guidance after stronger quarter",
+   "body": "The company raised its full-year outlook, citing demand it described as ahead of plan. Management left the capital expenditure range unchanged.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2012",
+   "date": "2026-01-06",
+   "symbol": "INTC",
+   "headline": "INTC lifts full-year guidance after stronger quarter",
+   "body": "The company raised its full-year outlook, citing demand it described as ahead of plan. Management left the capital expenditure range unchanged.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2005",
+   "date": "2026-01-12",
+   "symbol": "AMD",
+   "headline": "AMD reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2013",
+   "date": "2026-01-16",
+   "symbol": "INTC",
+   "headline": "INTC completes a small bolt-on acquisition",
+   "body": "Terms were not disclosed and the company said the transaction is not material to earnings in the current year.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2027",
+   "date": "2026-01-22",
+   "symbol": "NVDA",
+   "headline": "NVDA reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2025",
+   "date": "2026-01-27",
+   "symbol": "NVDA",
+   "headline": "NVDA names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2011",
+   "date": "2026-03-02",
+   "symbol": "GOOG",
+   "headline": "GOOG names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2004",
+   "date": "2026-04-01",
+   "symbol": "AAPL",
+   "headline": "AAPL names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2006",
+   "date": "2026-04-25",
+   "symbol": "AMD",
+   "headline": "AMD names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2003",
+   "date": "2026-05-22",
+   "symbol": "AAPL",
+   "headline": "AAPL reports a supply constraint easing",
+   "body": "Lead times shortened over the period. The company did not quantify the effect on volumes.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2015",
+   "date": "2026-05-30",
+   "symbol": "JPM",
+   "headline": "Analysts split on JPM after the latest print",
+   "body": "Coverage is divided: some read the quarter as an inflection, others as a one-off. No consensus revision has been published.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2030",
+   "date": "2026-06-08",
+   "symbol": "QQQ",
+   "headline": "QQQ names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  },
+  {
+   "id": "news_2034",
+   "date": "2026-06-24",
+   "symbol": "TSLA",
+   "headline": "TSLA names a new chief financial officer",
+   "body": "The appointment takes effect next quarter. The outgoing officer will remain available through the transition.",
+   "source": "Synthetic Newswire"
+  }
+ ]
+}

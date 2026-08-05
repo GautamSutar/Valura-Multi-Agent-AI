@@ -1,0 +1,55 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Valura take-home agent roster (GET /agents)",
+ "type": "object",
+ "required": [
+  "framework",
+  "agents"
+ ],
+ "properties": {
+  "framework": {
+   "const": "agno"
+  },
+  "framework_version": {
+   "type": "string"
+  },
+  "agents": {
+   "type": "array",
+   "minItems": 6,
+   "items": {
+    "type": "object",
+    "required": [
+     "role"
+    ],
+    "properties": {
+     "role": {
+      "enum": [
+       "router",
+       "book_qa",
+       "kyc_profile",
+       "notes_desk",
+       "market_desk",
+       "compliance",
+       "verifier"
+      ]
+     },
+     "name": {
+      "type": "string"
+     },
+     "model": {
+      "enum": [
+       "valura-fast",
+       "valura-deep"
+      ]
+     },
+     "tools": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     }
+    }
+   }
+  }
+ }
+}

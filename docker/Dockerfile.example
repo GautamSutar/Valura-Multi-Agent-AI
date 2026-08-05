@@ -1,0 +1,21 @@
+# A working example of the packaging contract. Your own
+# Dockerfile can look nothing like this; it only has to build, listen on $PORT,
+# and read BOOK_PATH, MARKET_PATH, LLM_BASE_URL and LLM_API_KEY from the
+# environment.
+FROM python:3.12-slim
+
+WORKDIR /app
+# Pin agno. We read requirements.txt, and "latest" is not a version.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+
+ENV PORT=8080
+EXPOSE 8080
+
+# Point Agno's model client at the gateway, not at a provider. The grading
+# network has no route out except the gateway, so anything reaching for a
+# provider directly fails here rather than in review.
+#   OpenAIChat(id="valura-fast", base_url=os.environ["LLM_BASE_URL"],
+#              api_key=os.environ["LLM_API_KEY"])
+CMD ["python", "-m", "your_service"]
