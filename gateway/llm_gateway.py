@@ -46,8 +46,13 @@ against a real upstream (your own key or a local OpenAI-compatible server).
 
 Environment: GATEWAY_PORT (default 8600), UPSTREAM_MODE (stub|passthrough),
 UPSTREAM_BASE_URL, UPSTREAM_API_KEY, MODEL_MAP_FAST, MODEL_MAP_DEEP,
-TOKEN_CAP_BILLED (default 3000000; beyond it every request fails with 429
+TOKEN_CAP_BILLED (default 1000000; beyond it every request fails with 429
 insufficient_quota, which is exactly what a blown budget does in production).
+The reference service finishes a whole run on about 8,000 billed tokens, so
+the cap leaves room for a build a hundred times chattier than that. What it
+does not leave room for is loading whole client records into the prompt: the
+book contains clients far too large for that, and a run that tries spends the
+back half of the paper on 429s.
 
 Standard library only. No auth: it is only ever reachable inside the isolated
 assessment network.
@@ -63,6 +68,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ALIASES = ("valura-fast", "valura-deep")
 BILL_MULTIPLIER = {"valura-fast": 1, "valura-deep": 4}
+# Kept as a literal because this file ships standalone in the kit and must not
+# import anything internal. verify_kit pins it to the published value.
+TOKEN_CAP_BILLED = 1_000_000
 
 _STATE_LOCK = threading.Lock()
 
@@ -80,6 +88,10 @@ class GatewayState:
         self.requests = 0
         self.rejected_429 = 0
         self.blackout_rejections = 0
+        # Counted apart from the chaos 429s. Exhausting the budget is a fact
+        # about the implementation; a chaos 429 is a fact about the weather,
+        # and the score has to tell them apart.
+        self.cap_rejections = 0
         self.prompt_tokens = 0
         self.completion_tokens = 0
         self.billed_tokens = 0
@@ -91,6 +103,8 @@ class GatewayState:
             "requests": self.requests,
             "rejected_429": self.rejected_429,
             "blackout_rejections": self.blackout_rejections,
+            "cap_rejections": self.cap_rejections,
+            "cap_reached": self.cap_rejections > 0,
             "prompt_tokens": self.prompt_tokens,
             "completion_tokens": self.completion_tokens,
             "total_tokens": self.prompt_tokens + self.completion_tokens,
@@ -251,7 +265,7 @@ class Handler(BaseHTTPRequestHandler):
                 "type": "invalid_model"}})
             return
 
-        cap = int(os.environ.get("TOKEN_CAP_BILLED", "3000000"))
+        cap = int(os.environ.get("TOKEN_CAP_BILLED", str(TOKEN_CAP_BILLED)))
         with _STATE_LOCK:
             over_cap = STATE.billed_tokens >= cap
             chaos = STATE.chaos_mode
@@ -264,6 +278,7 @@ class Handler(BaseHTTPRequestHandler):
             with _STATE_LOCK:
                 STATE.requests += 1
                 STATE.rejected_429 += 1
+                STATE.cap_rejections += 1
             self._send(429, {"error": {
                 "message": "token budget for this run is exhausted",
                 "type": "insufficient_quota"}})

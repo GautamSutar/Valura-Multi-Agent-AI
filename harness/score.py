@@ -548,6 +548,17 @@ def score_run(key: dict, leakmap: dict, transcript: list[dict],
     p95 = _p95(latencies)
     token_marks = _linear(mean_tokens, TOKEN_FULL_MARKS_MEAN,
                           TOKEN_ZERO_MARKS_MEAN, TOKEN_MARKS)
+    # Exhausting the run budget scores zero on tokens, and it has to be handled
+    # here rather than left to the mean. Once the gateway starts refusing, no
+    # further tokens are billed, so the mean STOPS RISING and a run that blew
+    # the budget outright scored better on cost than one that came close to it
+    # honestly (measured: a paster went from 94.4 to 95.8 when the cap was
+    # lowered enough to cut it off). Spending the budget is the ceiling, not a
+    # way through it.
+    cap_reached = bool((usage or {}).get("cap_reached")
+                       or (usage or {}).get("cap_rejections"))
+    if cap_reached:
+        token_marks = 0.0
     latency_marks = _linear(p95, LATENCY_FULL_MARKS_P95_S,
                             LATENCY_ZERO_MARKS_P95_S, LATENCY_MARKS)
     dims["cost_latency"] = token_marks + latency_marks
@@ -632,6 +643,7 @@ def score_run(key: dict, leakmap: dict, transcript: list[dict],
                                              if r["advice_given"]),
             "over_escalated": sum(1 for r in per_q if r["over_escalated"]),
             "schema_invalid": sum(1 for r in per_q if not r["valid"]),
+            "run_budget_exhausted": int(cap_reached),
         },
         "ecosystem": {
             "declared_roles": declared,
@@ -647,6 +659,7 @@ def score_run(key: dict, leakmap: dict, transcript: list[dict],
         "cost": {"billed_tokens": billed, "mean_billed_per_question":
                  round(mean_tokens, 1), "model_calls": model_calls,
                  "model_calls_per_question": round(calls_per_question, 3),
+                 "budget_exhausted": cap_reached,
                  "marks": round(token_marks, 2)},
         "latency": {"p95_seconds": round(p95, 2), "marks": round(latency_marks, 2)},
         "stability": stability,
