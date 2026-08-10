@@ -128,6 +128,27 @@ def _month_range(month: str | None) -> tuple[str | None, str | None]:
         return None, None
 
 
+_TXN_TYPES = ("deposit", "withdrawal", "buy", "sell", "dividend", "fee")
+_TXN_TYPE_SYNONYMS = {
+    "deposits": "deposit", "funding": "deposit", "fund": "deposit",
+    "withdrawals": "withdrawal", "withdraw": "withdrawal",
+    "buys": "buy", "purchase": "buy", "purchases": "buy", "bought": "buy",
+    "sells": "sell", "sale": "sell", "sales": "sell", "sold": "sell",
+    "disposal": "sell", "disposals": "sell",
+    "dividends": "dividend",
+    "fees": "fee",
+}
+
+
+def normalize_txn_type(raw: str | None) -> str | None:
+    if not raw:
+        return None
+    s = raw.strip().lower().replace(" ", "_")
+    if s in _TXN_TYPES:
+        return s
+    return _TXN_TYPE_SYNONYMS.get(s)
+
+
 def _normalize_kyc_field(name: str | None) -> str | None:
     if not name:
         return None
@@ -163,7 +184,7 @@ def resolve(book: Book, market: Market, client: dict, intent: str,
     if intent == "total_fees":
         return Fact("book_qa", intent, R.total_fees(client), "total fees")
     if intent == "txn_count":
-        ttype = cls.txn_type or "buy"
+        ttype = normalize_txn_type(cls.txn_type) or "buy"
         return Fact("book_qa", intent,
                    R.count_transactions(client, ttype, cls.symbol, date_from, date_to),
                    f"{ttype} count")
@@ -171,7 +192,7 @@ def resolve(book: Book, market: Market, client: dict, intent: str,
         if not cls.symbol:
             return Fact("book_qa", intent, R.QueryResult(None, [], found=False,
                         note="no instrument was named"), "first transaction date")
-        ttype = cls.txn_type or "buy"
+        ttype = normalize_txn_type(cls.txn_type) or "buy"
         return Fact("book_qa", intent,
                    R.first_transaction_date(client, ttype, cls.symbol),
                    "first transaction date")

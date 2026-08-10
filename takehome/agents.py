@@ -18,9 +18,6 @@ from pydantic import BaseModel, Field
 
 from takehome.llmclient import make_model
 
-ROLE = Literal["router", "book_qa", "kyc_profile", "notes_desk", "market_desk",
-               "compliance", "verifier"]
-
 INTENT_VALUES = (
     "cash_balance", "largest_deposit", "dividend_total", "total_deposits",
     "total_fees", "txn_count", "first_txn_date", "position_qty",
@@ -61,7 +58,9 @@ class Classification(BaseModel):
         "Reuses the same symbol/txn_type/kyc_field/date fields when both "
         "facts need one. Leave null for an ordinary single-fact question.")
     symbol: Optional[str] = Field(default=None, description="Instrument ticker mentioned, if any.")
-    txn_type: Optional[Literal["deposit", "withdrawal", "buy", "sell", "dividend", "fee"]] = None
+    txn_type: Optional[str] = Field(
+        default=None, description="One of: deposit, withdrawal, buy, sell, "
+        "dividend, fee -- whichever the question is about, if any.")
     txn_id: Optional[str] = Field(default=None, description="A specific transaction id mentioned, e.g. txn_100031.")
     year: Optional[int] = None
     month: Optional[str] = Field(default=None, description="Calendar month as YYYY-MM, if the question names one.")
