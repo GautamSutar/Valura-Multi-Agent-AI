@@ -1,14 +1,22 @@
 """Model construction and the resilience layer around every LLM call.
 
-Every call this service makes goes through `call_agent`, which is where the
-two chaos bands get handled: a bounded SDK-level retry absorbs the transient
-band (the first call for a question fails, the next one succeeds), and a
-short client-side timeout keeps a blackout from ever approaching the
-60-second per-question deadline. Nothing here retries forever.
+Every call this service makes goes through `call_agent`. Two distinct kinds
+of upstream trouble show up in practice: the assessment's own engineered
+chaos (a clean transient band, then a clean blackout band, each covering a
+contiguous run of questions) and genuine shared-capacity contention on the
+real provider ("Token Plan rate limit reached"), observed scattered across
+otherwise-normal questions when many candidates are running scored attempts
+at once. The SDK's own single retry absorbs the former; it was not enough
+for the latter, so `call_agent` adds its own short, bounded retry loop on
+top. Nothing here retries forever -- the loop is capped well under the
+60-second per-question deadline, and a genuine blackout (every call fails,
+for a whole band) still gives up and abstains honestly rather than burn the
+deadline chasing something that will not clear.
 """
 from __future__ import annotations
 
 import logging
+import time
 from dataclasses import dataclass
 from typing import Any
 
@@ -18,16 +26,20 @@ from agno.models.openai import OpenAIChat
 from agno.run.base import RunStatus
 
 _UPSTREAM_MARKERS = ("quota", "rate limit", "rate_limit", "429",
-                    "insufficient_quota", "unavailable")
+                    "insufficient_quota", "unavailable", "token plan")
 
 logger = logging.getLogger("takehome.llm")
 
-# One SDK-level retry: the gateway's transient band rejects exactly the first
-# call for a question and lets every later one through, so a single retry is
-# both necessary and sufficient. Retrying further only spends time a blackout
-# will never reward.
 SDK_MAX_RETRIES = 1
 REQUEST_TIMEOUT_S = 12.0
+# Total attempts made by call_agent's own loop, on top of the SDK's retry
+# inside each attempt. Backoff is short and fixed, not exponential: the
+# gateway's transient band clears on the very next call, and contention-based
+# provider limits observed in practice cleared within a few seconds, so
+# there is nothing to gain from a long climbing backoff -- only deadline
+# budget to lose.
+CALL_ATTEMPTS = 3
+RETRY_BACKOFF_S = 1.5
 
 
 def make_model(tier: str, api_key: str, base_url: str) -> OpenAIChat:
@@ -47,10 +59,7 @@ class LLMOutcome:
     detail: str = ""
 
 
-def call_agent(agent: Agent, prompt: str, **run_kwargs) -> LLMOutcome:
-    """Run an Agno agent and translate upstream failure into a flag the
-    orchestrator can act on, instead of letting an exception reach the
-    caller or a hung connection eat the question's deadline."""
+def _call_once(agent: Agent, prompt: str, **run_kwargs) -> LLMOutcome:
     try:
         result = agent.run(prompt, **run_kwargs)
         if result.status == RunStatus.error:
@@ -72,3 +81,24 @@ def call_agent(agent: Agent, prompt: str, **run_kwargs) -> LLMOutcome:
         # response take the whole question down; fall back deterministically.
         logger.exception("unexpected error calling agent %s", agent.name)
         return LLMOutcome(ok=False, upstream_issue=False, detail=str(e))
+
+
+def call_agent(agent: Agent, prompt: str, **run_kwargs) -> LLMOutcome:
+    """Run an Agno agent with a short bounded retry loop, and translate a
+    final upstream failure into a flag the orchestrator can act on, instead
+    of letting an exception reach the caller or a hung connection eat the
+    question's deadline."""
+    outcome = LLMOutcome(ok=False)
+    for attempt in range(CALL_ATTEMPTS):
+        outcome = _call_once(agent, prompt, **run_kwargs)
+        if outcome.ok:
+            return outcome
+        if not outcome.upstream_issue:
+            # A malformed/unexpected response, not a capacity problem --
+            # one retry can still help (a one-off glitch), but there is no
+            # reason to spend the full budget on it.
+            if attempt >= 1:
+                break
+        if attempt < CALL_ATTEMPTS - 1:
+            time.sleep(RETRY_BACKOFF_S)
+    return outcome
