@@ -12,4 +12,4 @@ ENV PORT=8080
 ENV AGNO_TELEMETRY=false
 EXPOSE 8080
 
-CMD python -m uvicorn takehome.service:app --host 0.0.0.0 --port ${PORT:-8080}
+CMD ["sh", "-c", "python -m uvicorn takehome.service:app --host 0.0.0.0 --port ${PORT:-8080}"]
