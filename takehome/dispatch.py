@@ -149,6 +149,23 @@ def normalize_txn_type(raw: str | None) -> str | None:
     return _TXN_TYPE_SYNONYMS.get(s)
 
 
+def _normalize_sector(market: Market, raw: str | None) -> str | None:
+    """Case/whitespace-insensitive match against the sectors actually present
+    in this market file, so 'communication services' or 'Info Tech' still
+    resolves to the exact string sector_exposure compares against."""
+    if not raw:
+        return None
+    sectors = {i["sector"] for i in market.instruments_by_symbol.values()}
+    s = raw.strip().lower()
+    for sec in sectors:
+        if sec.lower() == s:
+            return sec
+    for sec in sectors:
+        if s in sec.lower() or sec.lower() in s:
+            return sec
+    return raw
+
+
 def _normalize_kyc_field(name: str | None) -> str | None:
     if not name:
         return None
@@ -254,11 +271,12 @@ def resolve(book: Book, market: Market, client: dict, intent: str,
                         note="no instrument was named"), "sector")
         return Fact("market_desk", intent, R.sector_of(market, cls.symbol), "sector")
     if intent == "sector_exposure":
-        if not cls.sector:
+        sector = _normalize_sector(market, cls.sector)
+        if not sector:
             return Fact("market_desk", intent, R.QueryResult(None, [], found=False,
                         note="no sector was named"), "sector exposure")
         return Fact("market_desk", intent,
-                   R.sector_exposure(book, market, client, cls.sector),
+                   R.sector_exposure(book, market, client, sector),
                    "sector exposure")
     if intent == "news_summary":
         if not cls.symbol:
