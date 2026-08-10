@@ -43,6 +43,62 @@ INTENT_ROLE = {
     "news_summary": "market_desk", "rebalance_drift": "market_desk",
 }
 
+# A real reasoning model reliably returns a close paraphrase of the intended
+# value ("balance", "deposit_total") rather than the exact string in
+# INTENT_VALUES, even when the schema lists the exact values -- see
+# agents.py's comment on why `intent` is a free string, not a Literal. This
+# is the reconciliation layer: exact match, then a synonym table built from
+# what an actual model returned, then substring containment against the
+# canonical list as a last resort.
+_INTENT_SYNONYMS = {
+    "balance": "cash_balance", "cash": "cash_balance", "cash_position": "cash_balance",
+    "uninvested_cash": "cash_balance",
+    "deposit": "total_deposits", "deposits": "total_deposits",
+    "deposit_total": "total_deposits", "total_deposit": "total_deposits",
+    "biggest_deposit": "largest_deposit", "max_deposit": "largest_deposit",
+    "dividend": "dividend_total", "dividends": "dividend_total",
+    "fee": "total_fees", "fees": "total_fees",
+    "count": "txn_count", "transaction_count": "txn_count",
+    "buy_count": "txn_count", "sell_count": "txn_count",
+    "first_buy": "first_txn_date", "first_purchase": "first_txn_date",
+    "first_transaction": "first_txn_date",
+    "position": "position_qty", "holding": "position_qty",
+    "holdings": "position_qty", "shares": "position_qty",
+    "quantity": "position_qty", "qty": "position_qty",
+    "age": "account_age", "account_age_days": "account_age",
+    "symbols": "distinct_symbols", "holdings_count": "distinct_symbols",
+    "distinct_holdings": "distinct_symbols",
+    "kyc": "kyc_field", "pan": "kyc_field", "bank": "kyc_field",
+    "bank_account": "kyc_field", "identity": "kyc_field",
+    "risk": "risk_profile",
+    "kyc_complete": "kyc_status", "kyc_standing": "kyc_status",
+    "notes": "notes_summary", "note_summary": "notes_summary",
+    "memo": "txn_memo", "transaction_memo": "txn_memo",
+    "price": "price_asof", "close": "price_asof", "closing_price": "price_asof",
+    "return": "market_return", "performance": "market_return",
+    "sector": "sector_of",
+    "sector_concentration": "sector_exposure", "concentration": "sector_exposure",
+    "news": "news_summary",
+    "drift": "rebalance_drift", "allocation_drift": "rebalance_drift",
+    "overweight": "rebalance_drift", "underweight": "rebalance_drift",
+}
+
+
+def normalize_intent(raw: str | None) -> str:
+    if not raw:
+        return "other"
+    s = raw.strip().lower().replace(" ", "_").replace("-", "_")
+    if s in INTENT_ROLE or s == "other":
+        return s
+    if s in _INTENT_SYNONYMS:
+        return _INTENT_SYNONYMS[s]
+    bare = s.replace("_", "")
+    for canonical in sorted(INTENT_ROLE, key=len, reverse=True):
+        bare_c = canonical.replace("_", "")
+        if bare_c in bare or bare in bare_c:
+            return canonical
+    return "other"
+
 
 @dataclass
 class Fact:
@@ -84,6 +140,7 @@ def resolve(book: Book, market: Market, client: dict, intent: str,
     """Runs one intent against the deterministic layer. Returns None for an
     intent this dispatcher does not recognise (including 'other'), which the
     orchestrator treats as an honest abstention."""
+    intent = normalize_intent(intent)
     date_from, date_to = cls.date_from, cls.date_to
     if cls.month and not (date_from or date_to):
         date_from, date_to = _month_range(cls.month)

@@ -21,7 +21,7 @@ from takehome.llmclient import make_model
 ROLE = Literal["router", "book_qa", "kyc_profile", "notes_desk", "market_desk",
                "compliance", "verifier"]
 
-Intent = Literal[
+INTENT_VALUES = (
     "cash_balance", "largest_deposit", "dividend_total", "total_deposits",
     "total_fees", "txn_count", "first_txn_date", "position_qty",
     "account_age", "distinct_symbols",
@@ -30,7 +30,16 @@ Intent = Literal[
     "price_asof", "market_return", "sector_of", "sector_exposure",
     "news_summary", "rebalance_drift",
     "other",
-]
+)
+# Not a Literal: measured against a real reasoning model, it reliably
+# returns a close paraphrase of the intended value ("balance" instead of
+# "cash_balance") rather than the exact literal, and a strict enum makes
+# Agno's structured-output parsing reject the entire response, not just that
+# field -- observed as grounded=0 across a full qualifying attempt. A free
+# string that `dispatch.normalize_intent` reconciles against the same list
+# is far more robust to real-model phrasing than a schema constraint the
+# provider does not actually enforce.
+Intent = str
 
 
 class Classification(BaseModel):
@@ -42,9 +51,9 @@ class Classification(BaseModel):
     safety-relevant, so the orchestrator ORs them with an independent regex
     check rather than trusting this alone."""
     intent: Intent = Field(
-        description="The ONE thing this question is actually asking for. "
-        "This is not a role name -- pick from the enum of question kinds "
-        "below, e.g. 'cash_balance' or 'kyc_field', never 'book_qa'.")
+        description="The ONE thing this question is actually asking for, as "
+        "one of: " + ", ".join(INTENT_VALUES) + ". This is not a role name "
+        "-- never 'book_qa' or 'kyc_profile'.")
     secondary_intent: Optional[Intent] = Field(
         default=None, description="Set only when the question genuinely asks "
         "for two distinct facts, e.g. 'what is the PAN, and when did they "
