@@ -25,8 +25,9 @@ docker build -t valura-takehome .        # packaging contract; reads BOOK_PATH e
 ## Architecture
 
 `router` is a real Agno `Agent` (valura-fast) that classifies each question into a
-structured `Classification` (roles, an `intent` enum, and any symbol/date/txn-type it
-extracted) via Agno's `output_schema`. `book_qa`, `kyc_profile`, `market_desk` and
+structured `Classification` (an `intent`, and any symbol/date/txn-type it extracted)
+via Agno's `output_schema`; the role is derived from `intent` in code
+(`dispatch.INTENT_ROLE`), not asked of the model separately. `book_qa`, `kyc_profile`, `market_desk` and
 `compliance` are also real `Agent` objects (declared in the roster, capable of running),
 but their owned logic — retrieval, arithmetic, masking, the market-coverage boundary,
 refusal wording — executes as deterministic Python in `takehome/retrieval.py` and
@@ -73,13 +74,18 @@ path produced it, and swaps in a safe deterministic summary if it finds anything
 this to reach the answer, the LLM would have to fabricate PII it was never given, and
 the post-hoc scan would still have to miss the fabricated string.
 
-**Provider down for an hour — what degrades?** Every `book_qa`, `kyc_profile` and
-`market_desk` answer is unaffected in both correctness and latency — no model call is
-on that path. `notes_desk` narration and cross-client/advice classification lose the
-model's help but not their safety property: the regex backstop still refuses correctly
-without the router. What genuinely degrades is coverage of ambiguously-phrased
-questions the regex fallback can't classify — those abstain honestly rather than
-guess, which `score.py`'s blackout rule scores identically to answering correctly.
+**Provider down for an hour — what degrades?** Nothing gets *slower* in a useful
+sense — `call_agent` retries up to 3 times over a fixed ~1.5s backoff (enough to ride
+out the shared-capacity contention actually observed during qualifying attempts) and
+then gives up well inside the 60s deadline. Every `book_qa`, `kyc_profile` and
+`market_desk` answer is unaffected in *correctness*, since no model call is on that
+path. `notes_desk` narration and cross-client/advice classification lose the model's
+help but not their safety property: the regex backstop still refuses correctly without
+the router. What genuinely degrades is coverage of ambiguously-phrased questions the
+router can't classify without the model — those abstain honestly with `upstream_issue`
+rather than guess, which costs marks on ordinary categories (only the officially
+engineered `chaos_blackout` questions score an honest abstain the same as a right
+answer) but never a fabrication or a leak.
 
 **What did Agno make easy/hard, and what came from source, not docs?** Easy: wiring
 `OpenAIChat` at an arbitrary `base_url` (the gateway) and getting structured Pydantic
@@ -91,14 +97,34 @@ Agno does **not** raise — `Agent.run()` returns a `RunOutput` with
 `status=RunStatus.error` and the error text sitting in `.content`. My first blackout
 run silently mis-flagged every blackout question as a generic internal error because
 I was only catching `openai.RateLimitError`; `agno/agent/_response.py` was where I
-found the real shape of an errored run, not an exception at all.
+found the real shape of an errored run, not an exception at all. A third finding, from
+the first qualifying attempt against the real model rather than from source: Agno's
+`output_schema` did not enforce a `Literal` field as strictly as I expected against this
+provider — the model returned close paraphrases ("balance" for "cash_balance",
+"purchase" for "buy") and pydantic rejected the *entire* `Classification` over one
+field, not just that field. `intent` and `txn_type` are now plain strings, reconciled
+against the canonical values in code (`dispatch.normalize_intent` /
+`normalize_txn_type`) rather than trusted to arrive exact.
 
 ## Weak / next steps
 
+**What I know from three qualifying attempts (30.3 → 32.3 → 31.9 / 96, all gates
+passed, zero leaks/fabrication/PII across all three):** the roles-field and
+strict-Literal fixes above came from reading these attempts' logs, in that order, and
+each one was real but not the whole story — the third attempt's logs show the
+remaining loss is dominated by genuine upstream capacity contention ("Token Plan rate
+limit reached"), scattered across ordinary questions, not the engineered chaos bands.
+The retry loop added afterward addresses that but was not itself validated against a
+scored attempt, since all three were spent by the time it was built. This is the
+single weakest point in the submission: the LLM-dependent path was validated
+end-to-end against a mock reasoning gateway (`tests/mock_reasoning_gateway.py`) and,
+after the fact, against the literal values a real model returned, but never against a
+real model with the retry loop in place, because practice is always a non-reasoning
+stub and qualifying attempts are finite.
+
 The router uses one `intent` + optional `secondary_intent`; a question needing three
-facts, or two facts from the *same* role, isn't representable. The date/range parsing
-inside `dispatch.py` trusts the router's ISO-string extraction with no second parser
-to cross-check it. Given more time: a genuine tool-calling notes_desk agent instead of
-a single narration call, and a small cache keyed on `(client_id, intent, params)` for
-repeated/paraphrased questions — not built, since the citation and value contract
-already makes correctness cheap without one.
+facts, or two facts from the *same* role, isn't representable. Given more time: a
+genuine tool-calling notes_desk agent instead of a single narration call, and a small
+cache keyed on `(client_id, intent, params)` for repeated/paraphrased questions — not
+built, since the citation and value contract already makes correctness cheap without
+one.
