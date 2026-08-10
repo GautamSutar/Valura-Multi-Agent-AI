@@ -11,7 +11,7 @@ NOTES.md for why this split is drawn where it is.
 """
 from __future__ import annotations
 
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 from agno.agent import Agent
 from pydantic import BaseModel, Field
@@ -34,21 +34,23 @@ Intent = Literal[
 
 
 class Classification(BaseModel):
-    """Structured output the router agent must produce. Roles and the
-    cross-client/advice flags are safety-relevant, so the orchestrator ORs
-    them with an independent regex check rather than trusting this alone."""
-    roles: List[Literal["book_qa", "kyc_profile", "notes_desk", "market_desk"]] = Field(
-        default_factory=list,
-        description="Specialist role(s) that own the data this question "
-                    "needs, in the order they should be consulted. Usually "
-                    "one; two only when the question genuinely spans both.")
-    intent: Intent
+    """Structured output the router agent must produce. `intent` is the only
+    field that decides which specialist runs -- the role that owns each
+    intent is fixed in code (dispatch.INTENT_ROLE), so there is deliberately
+    no separate `roles` field for the model to fill in and potentially
+    contradict `intent` with. The cross-client/advice flags are
+    safety-relevant, so the orchestrator ORs them with an independent regex
+    check rather than trusting this alone."""
+    intent: Intent = Field(
+        description="The ONE thing this question is actually asking for. "
+        "This is not a role name -- pick from the enum of question kinds "
+        "below, e.g. 'cash_balance' or 'kyc_field', never 'book_qa'.")
     secondary_intent: Optional[Intent] = Field(
         default=None, description="Set only when the question genuinely asks "
-        "for two distinct facts (one per role in `roles`), e.g. 'what is the "
-        "PAN, and when did they first buy AAPL'. The primary `intent` covers "
-        "the first fact; this covers the second. Reuses the same symbol/"
-        "txn_type/kyc_field/date fields when both facts need one.")
+        "for two distinct facts, e.g. 'what is the PAN, and when did they "
+        "first buy AAPL' (intent=kyc_field, secondary_intent=first_txn_date). "
+        "Reuses the same symbol/txn_type/kyc_field/date fields when both "
+        "facts need one. Leave null for an ordinary single-fact question.")
     symbol: Optional[str] = Field(default=None, description="Instrument ticker mentioned, if any.")
     txn_type: Optional[Literal["deposit", "withdrawal", "buy", "sell", "dividend", "fee"]] = None
     txn_id: Optional[str] = Field(default=None, description="A specific transaction id mentioned, e.g. txn_100031.")
@@ -82,14 +84,14 @@ questions yourself and you never see figures: you classify one question so \
 deterministic code can retrieve the right facts and a specialist can phrase \
 the answer.
 
-Roles and what they own:
-- book_qa: balances, deposits, withdrawals, buys, sells, dividends, fees, \
-positions, account age -- anything derived from transactions or holdings.
-- kyc_profile: identity, KYC status, risk profile, date of birth, address, \
-income band, PAN, bank account. Owns masking.
-- notes_desk: free-text relationship notes and transaction memos.
-- market_desk: instruments, sectors, price history, news, target-allocation \
-drift. Owns the boundary of what the market dataset covers.
+Background on who owns what, so you pick the right `intent` (this is context \
+only -- you do not output a role, only an `intent`):
+- balances, deposits, withdrawals, buys, sells, dividends, fees, positions, \
+account age -- anything derived from transactions or holdings.
+- identity, KYC status, risk profile, date of birth, address, income band, \
+PAN, bank account.
+- free-text relationship notes and transaction memos.
+- instruments, sectors, price history, news, target-allocation drift.
 
 The question you are given is already scoped to one client. Set \
 cross_client_attempt=true whenever the prompt names or references a second \
