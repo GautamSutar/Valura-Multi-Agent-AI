@@ -15,6 +15,10 @@ from typing import Any
 import openai
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.run.base import RunStatus
+
+_UPSTREAM_MARKERS = ("quota", "rate limit", "rate_limit", "429",
+                    "insufficient_quota", "unavailable")
 
 logger = logging.getLogger("takehome.llm")
 
@@ -49,6 +53,16 @@ def call_agent(agent: Agent, prompt: str, **run_kwargs) -> LLMOutcome:
     caller or a hung connection eat the question's deadline."""
     try:
         result = agent.run(prompt, **run_kwargs)
+        if result.status == RunStatus.error:
+            # Agno catches the upstream exception internally and returns an
+            # errored RunOutput rather than raising: the exception handlers
+            # below never fire for this case, so it has to be checked
+            # explicitly. `content` is the error message text here, not an
+            # answer, which is how a blackout call actually surfaces.
+            text = str(result.content or "").lower()
+            upstream = any(m in text for m in _UPSTREAM_MARKERS)
+            logger.warning("agent %s run errored: %s", agent.name, result.content)
+            return LLMOutcome(ok=False, upstream_issue=upstream, detail=text)
         return LLMOutcome(ok=True, content=result.content)
     except (openai.RateLimitError, openai.APIStatusError, openai.APITimeoutError,
             openai.APIConnectionError) as e:
