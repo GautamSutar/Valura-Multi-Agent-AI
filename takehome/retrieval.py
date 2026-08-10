@@ -13,6 +13,7 @@ from datetime import date
 from decimal import Decimal
 
 from takehome.data import Book, Market
+from takehome.masking import mask_bank_account, mask_pan
 from takehome.money import dec
 
 CASH_QTY_TOLERANCE = Decimal("0.0005")
@@ -202,6 +203,13 @@ def kyc_field(client: dict, field_name: str) -> QueryResult:
     if val is None:
         return QueryResult(None, [], found=False,
                            note=f"no {field_name} on file")
+    # Masking happens here, at the source, so the raw PAN or account number
+    # never exists in a QueryResult, a prompt, or a response: nothing
+    # downstream can bypass a mask that was never carried past this line.
+    if field_name == "pan":
+        val = mask_pan(str(val))
+    elif field_name == "bank_account":
+        val = mask_bank_account(str(val.get("account_number", "")))
     return QueryResult(val, [kyc["id"]])
 
 
